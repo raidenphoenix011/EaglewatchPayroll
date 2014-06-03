@@ -95,10 +95,10 @@ def getClientContactPersons(val):
   ClientContactPersonsList = []
   for row in res:
     if row is not None:
-      ClientContactPerson = ClientContactPersons.ClientContactPersons( int(row[0]), int(row[1]), int(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]) )
+      ClientContactPerson = ClientContactPersons.ClientContactPersons( int(row[0]), int(row[1]), int(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]) )
       ClientContactPersonsList.append(ClientContactPerson)
       row = cur.fetchone()
-  return DetachmentList
+  return ClientContactPersonsList
 
 
 def getDetachmentContactPersons(val):
@@ -109,4 +109,4 @@ def getDetachmentContactPersons(val):
       DetachmentContactPerson = DetachmentContactPersons.DetachmentContactPersons( int(row[0]), int(row[1]), int(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]) )
       DetachmentContactPersonsList.append(DetachmentContactPerson)
       row = cur.fetchone()
-  return DetachmentList
+  return DetachmentContactPersonsList
