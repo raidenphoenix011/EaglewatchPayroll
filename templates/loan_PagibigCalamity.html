@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>BENEFITS SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Government Loans</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('viewLoansSSS') }}' class='opt2'>SSS Loans</a></li>
+            <li class="nobullets"><a href='{{ url_for('viewLoansCalamity') }}' class='opt2'>Pag-ibig Calamity Loans</a></li>
+            <li class="nobullets"><a href='{{ url_for('viewLoansSalary') }}' class='opt2'>Pag-ibig Salary Loans</a></li>
+        </ul> 
+    </div>
+
+</div>
+
+{% endblock sidebar %}
+
+{% block content %}
+
+<h1>Pag-ibig Calamity Loans</h1>
+<hr>
+
+
+<br/>
+
+<br/><br/>
+
+    <div id="employees">
+    <form class='pure-form'>
+        <label>Search: </label><input type="text" class="search" placeholder="" id='search_employee' />
+        <br/><br/>
+        <table class='pure-table'>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th class="sort" data-sort="name">Name</th>
+            <th class="sort" data-sort="loan">Principal Loan</th>
+            <th class="sort" data-sort="payment">Monthly Payment</th>
+            <th class="sort" data-sort="balance">Balance</th>
+            <th class="sort" data-sort="datecreated">DateCreated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td class="id" style="display:none;">1</td>
+            <td>1</td>
+            <td class="name">Juan dela Cruz</td>
+            <td class="loan">20000</td>
+            <td class="payment">500</td>
+            <td class="balance">10000</td>
+            <td class="datecreated">2014-01-01</td>
+            <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+          </tr>
+          <tr>
+            <td class="id" style="display:none;">2</td>
+            <td>2</td>
+            <td class="name">Mike Santos</td>
+            <td class="loan">15000</td>
+            <td class="payment">300</td>
+            <td class="balance">9000</td>
+            <td class="datecreated">2014-02-01</td>
+            <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+          </tr>
+          <tr>
+            <td class="id" style="display:none;">3</td>
+            <td>3</td>
+            <td class="name">Nick Simon</td>
+            <td class="loan">10000</td>
+            <td class="payment">200</td>
+            <td class="balance">1000</td>
+            <td class="datecreated">2013-12-01</td>
+            <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <table>
+        <td class="name">
+          <input type="hidden" id="contact_id-field" />
+          <input type="text" id="name-field" placeholder="employee name" />
+        </td>
+        <td class="loan">
+          <input type="text" id="loan-field" placeholder="principal loan" />
+        </td>
+        <td class="payment">
+          <input type="text" id="number-field" placeholder="monthly payment" />
+        </td>
+        <td class="add">
+          <button id="add-btn" class="pure-button">Add to Loans</button>
+        </td>
+      </table>
+    </form>
+    </div>
+
+<!-------SCRIPT FOR ListJS search detachment ------>
+<script>
+var options = {
+  valueNames: [ 'id', 'name', 'loan', 'payment', 'balance' ]
+};
+
+// Init list
+var employeeList = new List('employees', options);
+
+var idField = $('#id-field'),
+    nameField = $('#name-field'),
+    loanField = $('#loan-field'),
+    paymentField = $('#payment-field'),
+    balanceField = $('#balance-field');
+</script>
+
+<!------SCRIPT FOR ListJS search contact ------->
+<script>
+var options2 = {
+  valueNames: [ 'id', 'name', 'position', 'number' ]
+};
+
+// Init list
+var employeeList = new List('employees', options2);
+
+var contact_idField = $('#contact_id-field'),
+    contact_nameField = $('#contact_name-field'),
+    positionField = $('#position-field'),
+    numberField = $('#number-field'),
+    addBtn = $('#add-btn'),
+    editBtn = $('#edit-btn').hide(),
+    removeBtns = $('.remove-item-btn'),
+    editBtns = $('.edit-item-btn');
+
+// Sets callbacks to the buttons in the list
+refreshCallbacks();
+
+addBtn.click(function() {
+  contactList.add({
+    contact_id: Math.floor(Math.random()*110000),
+    contact_name: contact_nameField.val(),
+    position: positionField.val(),
+    number: numberField.val()
+  });
+  clearFields();
+  refreshCallbacks();
+});
+
+editBtn.click(function() {
+  var item = contactList.get('contact_id', contact_idField.val())[0];
+  item.values({
+    contact_id:contact_idField.val(),
+    contact_name: contact_nameField.val(),
+    position: positionField.val(),
+    number: numberField.val()
+  });
+  clearFields();
+  editBtn.hide();
+  addBtn.show();
+});
+
+function refreshCallbacks() {
+  // Needed to add new buttons to jQuery-extended object
+  removeBtns = $(removeBtns.selector);
+  editBtns = $(editBtns.selector);
+  
+  removeBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.contact_id').text();
+    contactList.remove('contact_id', itemId);
+  });
+  
+}
+
+function clearFields() {
+  contact_nameField.val('');
+  positionField.val('');
+  numberField.val('');
+}    
+</script>    
+
+    
+{% endblock content %}
