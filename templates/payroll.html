@@ -6,24 +6,12 @@
     <hr class='navline navline1'/>
     <h2 class='navtitle'>PAYROLL SYSTEM</h2>
     <hr class='navline'/>
+    
     <div class='sidebar-menu'>
         <h4>Payroll Records</h4>
         <ul class="right">
-            <li class="nobullets">New Payroll Record</li>
-            <li class="nobullets">View Payroll Record</li>
-        </ul> 
-        <h4>Payroll Reports</h4>
-        <ul class="right">
-            <li class="nobullets">Payroll Status</li>
-            <li class="nobullets">Payroll Register</li>
-            <li class="nobullets">Payslip</li>
-            <li class="nobullets">Accounting</li>
-            <li class="nobullets">Government Reports</li>
-        </ul> 
-        <h4>Receivables</h4>
-        <ul class="right">
-            <li class="nobullets">13th Month Pay</li>
-            <li class="nobullets">Holiday Pay</li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayroll') }}' class='opt2'>View Record</a></li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayroll') }}' class='opt2'>Add Record</a></li>
         </ul> 
     </div>
 
