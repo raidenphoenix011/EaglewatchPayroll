@@ -55,9 +55,9 @@ def SubList(tableName, foreignKey, value):
   return res
 
 def getAllFieldEmployees():
-  #sql = "SELECT * FROM FieldEmployees"
-  #res = getAll(sql)
-  res = List("FieldEmployees")
+  sql = "SELECT f.ID, ft.Description, f.FECode, f.DisplayCode, f.Suffix, f.LastName, f.FirstName, f.MiddleName, f.Landline, f.MobileNo, f.Address, f.BirthDate, f.Gender, f.CivilStatus, f.Dependents,f.Skills, f.DateHired, f.DateResigned, f.FieldEmpStatus, f.CholStatus, f.FileStatus FROM FieldEmployees f INNER JOIN FieldEmployeeTypes ft ON f.Type = ft.Type WHERE f.ID = 1;"
+  res = getAll(sql)
+  #res = List("FieldEmployees")
   FieldEmployeeList = []
   for row in res:
     if row is not None:
