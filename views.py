@@ -88,12 +88,14 @@ def addManhour(user=None):
 def manhour(user=None):
   return render_template('manhour.html', user=escape(session['user']), dept='manhour')
 
-@app.route('/detachments', methods=['POST', 'GET'])
-def searchDetachment(mod, user=None):
+@app.route('/detachments/<mod>', methods=['POST', 'GET'])
+def listDetachments(mod, user=None):
+  if mod == 'detachment':
+    return render_template('detachment_search.html', user=escape(session['user']), navtitle='CLIENT RECORDS', mode='viewDetachment')
   if mod=='payroll':
-    return render_template('detachment_search.html', user=escape(session['user']), navtitle='PAYROLL SYSTEM', mode='payroll')
+    return render_template('detachment_search.html', user=escape(session['user']), navtitle='PAYROLL SYSTEM', mode='viewPeriods')
   elif mod=='manhour':
-    return render_template('detachment_search.html', user=escape(session['user']), navtitle='MANHOUR RECORDS', mode='manhour')
+    return render_template('detachment_search.html', user=escape(session['user']), navtitle='MANHOUR RECORDS', mode='viewPeriods')
 
 @app.route('/payroll', methods=['POST', 'GET'])
 def payroll(user=None):
