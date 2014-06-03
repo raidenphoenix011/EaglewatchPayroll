@@ -734,7 +734,7 @@ CREATE PROCEDURE addSSSLoan(
 	FieldEmpID INT,
 	Amount DECIMAL(10,2),
 	MonthlyPay DECIMAL(10,2))
-BEGIN	
+BEGIN
 	INSERT INTO SSSLoans
 	(FieldEmpID,Amount,MonthlyPay,Balance,DateCreated)
 	VALUES
@@ -754,6 +754,16 @@ BEGIN
 	ID = iID AND FieldEmpID = iFieldEmpID AND Balance > 0;
 END $$
 #CALL updateSSSLoan(ID,FieldEmpID);
+
+CREATE PROCEDURE deleteSSSLoan(	
+	iID INT,
+	iFieldEmpID INT)
+BEGIN
+	DELETE SSSLoans
+	WHERE
+	ID = iID AND FieldEmpID = iFieldEmpID;
+END $$
+#CALL deleteSSSLoan(ID,FieldEmpID);
 
 #Calamity Loans
 
@@ -782,6 +792,17 @@ BEGIN
 END $$
 #CALL updateCalamityLoan(ID,FieldEmpID);
 
+CREATE PROCEDURE deleteCalamityLoan(	
+	iID INT,
+	iFieldEmpID INT)
+BEGIN
+	DELETE PagibigCalamityLoans
+	WHERE
+	ID = iID AND FieldEmpID = iFieldEmpID;
+END $$
+#CALL deleteCalamityLoan(ID,FieldEmpID);
+
+
 #Salary Loans
 
 CREATE PROCEDURE addSalaryLoan(	
@@ -809,6 +830,17 @@ BEGIN
 END $$
 #CALL updateCalamityLoan(ID,FieldEmpID);
 
+CREATE PROCEDURE deleteSalaryLoan(	
+	iID INT,
+	iFieldEmpID INT)
+BEGIN
+	DELETE PagibigSalaryLoans
+	WHERE
+	ID = iID AND FieldEmpID = iFieldEmpID;
+END $$
+#CALL deleteCalamityLoan(ID,FieldEmpID);
+
+#Get amount from SSS COntribution
 CREATE PROCEDURE getSSSCon(
 	iFieldEmpID INT,
 	OUT EEAmt DECIMAL(10,2)	)
