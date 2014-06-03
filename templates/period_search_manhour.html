@@ -7,14 +7,10 @@
     <hr class='navline'/>
     
     <div class='sidebar-menu'>
-        <h4>Client Information</h4>
+        <h4>Manhour Records</h4>
         <ul class="right">
-            <li class="nobullets"><a href='{{ url_for('listClients') }}' class='opt2'>View Client</a></li>
-            <li class="nobullets"><a href='{{ url_for('addClient') }}' class='opt2'>Add New Client</a></li>
-        </ul> 
-        <h4>Detachment Information</h4>
-        <ul class="right">
-            <li class="nobullets"><a href='/detachments' class='opt2'>View Detachment</a></li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsManhour') }}' class='opt2'>View Record</a></li>
+            <li class="nobullets"><a href='{{ url_for('addManhour') }}' class='opt2'>Add Record</a></li>
         </ul> 
     </div>
 
@@ -30,7 +26,7 @@
 {% endfor %}-->
 <br/>
 <div id="periods">
-  <form class='pure-form pure-form-aligned' method='link' action='{{ url_for( view ) }}'>
+  <form class='pure-form pure-form-aligned' method='link' action='{{ url_for('manhour') }}'>
     <button class='pure-button'>Add New Manhour Record</button>
   </form>
   <br/><br/><br/>
@@ -49,7 +45,7 @@
 
     <tbody class="list">
       <tr>
-        <td class="period"><a href='{{ url_for(view) }}'>0114</a></td>
+        <td class="period"><a href='{{ url_for('manhour') }}'>0114</a></td>
         <td class="start">Jan. 1, 2014</td>
 	<td class="end">Jan. 15, 2014</td>
       </tr>

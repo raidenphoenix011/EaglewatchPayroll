@@ -21,10 +21,10 @@ def login():
         return redirect(url_for('listClients'))   
     if user == 'manhour_officer':
         session['usertype'] = 'MO'
-        return redirect(url_for('listDetachments'))
+        return redirect(url_for('listDetachmentsManhour'))
     if user == 'payroll_officer':
         session['usertype'] = 'PyO'
-        return redirect(url_for('listDetachments'))   
+        return redirect(url_for('listDetachmentsPayroll'))   
     else:
       return redirect(url_for(user))
   return render_template('login.html')
@@ -80,29 +80,30 @@ def addClient(user=None):
     #getMaxID() + 1
   return render_template('client.html', user=escape(session['user']))
 
-@app.route('/detachments/get', methods=['POST', 'GET'])
-def viewDetachment(user=None):
+@app.route('/detachments/get/<ID>', methods=['POST', 'GET'])
+def viewDetachment(ID, user=None):
   return render_template('detachment.html', user=escape(session['user']))
 
-@app.route('/manhours/detachments', methods=['POST', 'GET'])
+@app.route('/manhours/detachments/get/id/add', methods=['POST', 'GET'])
 def addManhour(user=None):
-  return render_template('detachment_search.html', user=escape(session['user']), navtitle='MANHOUR RECORDS', mode='manhour')
+  return render_template('detachment_search_manhour.html', user=escape(session['user']), navtitle='MANHOUR RECORDS', mode='manhour')
 
 @app.route('/manhour', methods=['POST', 'GET'])
 def manhour(user=None):
   return render_template('manhour.html', user=escape(session['user']), dept='manhour')
 
+@app.route('/manhours/detachments', methods=['POST', 'GET'])
+def listDetachmentsManhour(user=None):
+    return render_template('detachment_search_manhour.html', user=escape(session['user']))
+
 @app.route('/detachments', methods=['POST', 'GET'])
 def listDetachments(user=None):
-  if session['usertype']=='BiO':
-    return render_template('detachment_search.html', user=escape(session['user']),  goto='viewDetachment',navtitle='CLIENT RECORDS', mode='viewDetachment')
-  elif session['usertype'] == 'PyO':
-    return render_template('detachment_search.html', user=escape(session['user']), goto='payroll', navtitle='PAYROLL SYSTEM', mode='viewPeriods')
-  elif session['usertype'] == 'MO':
-    return render_template('detachment_search.html', user=escape(session['user']),  goto='manhour',navtitle='MANHOUR RECORDS', mode='viewPeriods')
-  else:
-    return render_template('detachment_search.html', user=escape(session['user']), navtitle='NO USER TYPE', mode='viewPeriods')
+    return render_template('detachment_search.html', user=escape(session['user']))
 
+@app.route('/payroll/detachments', methods=['POST', 'GET'])
+def listDetachmentsPayroll(user=None):
+    return render_template('detachment_search_payroll.html', user=escape(session['user']))
+ 
 @app.route('/detachments/<usertype>', methods=['POST', 'GET'])
 def listDetachmentsAdmin(usertype, user=None):
   if usertype =='BiO':
@@ -114,18 +115,19 @@ def listDetachmentsAdmin(usertype, user=None):
   else:
     return render_template('detachment_search.html', user=escape(session['user']), navtitle='NO USER TYPE', mode='viewPeriods')
 
-@app.route('/payroll', methods=['POST', 'GET'])
-def payroll(user=None):
+@app.route('/payroll/detachments/get/id/period', methods=['POST', 'GET'])
+def viewPayroll(user=None):
     return render_template('payroll.html', user=escape(session['user']))
 
-@app.route('/manhour/detachments/get/ID/records', methods=['POST', 'GET'])
-def viewPeriods(user=None):
-  if session['usertype']=='MO':
-    return render_template('period_search.html', user=escape(session['user']))
-  if session['usertype']=='PyO':
-    return render_template('period_search.html', user=escape(session['user']))
-  else:
-    return render_template('admin.html', user=escape(session['user']))
+@app.route('/manhours/detachments/get/ID/records', methods=['POST', 'GET'])
+def viewPeriodsManhour(user=None):
+    return render_template('period_search_manhour.html', user=escape(session['user']))
+
+@app.route('/payroll/detachments/get/ID/records', methods=['POST', 'GET'])
+def viewPeriodsPayroll(user=None):
+    return render_template('period_search_payroll.html', view='payroll', user=escape(session['user']))
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
