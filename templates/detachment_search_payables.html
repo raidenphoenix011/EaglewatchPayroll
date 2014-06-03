@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>PAYABLES SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Payable Records</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayables') }}' class='opt2'>View Record</a></li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayables') }}' class='opt2'>Add Record</a></li>
+        </ul> 
+    </div>
+
+</div>
+{% endblock sidebar %}
+
+{% block content %}
+
+<h1>Choose a Detachment</h1>
+
+<!--{% for company in companies %}
+{% endfor %}-->
+
+<div id="detachments">
+            <br/>
+            <form class='pure-form pure-form-aligned'>
+              <input type="text" class="search" placeholder="Search detachment" />
+            </form>
+            <br/>
+            <table class='search-results pure-table'>
+              <thead>
+                <tr>
+                  <th class="sort" data-sort="code">Company</th>
+                  <th class="sort" data-sort="name">Detachment Name</th>
+                  <th class="sort" data-sort="city">City</th>
+                  <th class="sort" data-sort="client">Company</th>
+                  <th class="sort" data-sort="status">Status</th>
+                </tr>
+              </thead>
+          
+              <tbody class="list">
+                <tr>
+                  <td class="id" style="display:none;">1</td>
+                  <td class="code">D001234</td>
+                  <td class="name"><a href='{{ url_for('viewPeriodsPayables') }}'>Accenture 1880</a></td>
+                  <td class="city">Quezon City</td>
+                  <td class="client">Accenture</td>
+                  <td class="status">Active</td>
+                </tr>
+                <tr>
+                  <td class="id" style="display:none;">2</td>
+                  <td class="code">D004354</td>
+                  <td class="name">Accenture Global One</td>
+                  <td class="city">Taguig</td>
+                  <td class="client">Accenture</td>
+                  <td class="status">Active</td>
+                </tr>
+                <tr>
+                  <td class="id" style="display:none;">3</td>
+                  <td class="code">D004354</td>
+                  <td class="name">Science Hub</td>
+                  <td class="city">Makati</td>
+                  <td class="client">Accenture</td>
+                  <td class="status">Pending</td>
+                </tr>
+                <tr>
+                  <td class="id" style="display:none;">4</td>
+                  <td class="code">D003245</td>
+                  <td class="name">Gateway</td>
+                  <td class="city">Quezon City</td>
+                  <td class="client">Accenture</td>
+                  <td class="status">Terminated</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+<!-------SCRIPT FOR ListJS search detachment ------>
+<script>
+var options = {
+  valueNames: [ 'id', 'code', 'name', 'city', 'client', 'status' ]
+};
+
+// Init list
+var detachmentList = new List('detachments', options);
+
+var idField = $('#id-field'),
+    codeField = $('#code-field'),
+    nameField = $('#name-field'),
+    cityField = $('#city-field'),
+    clientField = $('#client-field'),
+    statusField = $('#status-field');
+</script>
+    
+{% endblock content %}

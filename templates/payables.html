@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>PAYABLES SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Payable Records</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayables') }}' class='opt2'>View Record</a></li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayables') }}' class='opt2'>Add Record</a></li>
+        </ul> 
+    </div>
+
+</div>
+{% endblock sidebar %}
+
+{% block content %}
+
+    <h1>Payable Record</h1>
+    <hr>
+    <br/>
+    <form class='pure-form pure-form-aligned' method='post' action=''>
+    <table>
+        <tr>
+            <td><label>Detachment Code: </label></td>
+            <td><input class='codebox' class="pure-input" name='detachment_name' type='text' disabled></td>
+            <td><label>Detachment Name: </label><input class='namebox' class="pure-input" name='detachment_name' type='text' disabled></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><label for='period_code'>Period Code:</label></td>
+            <td><input id='period_code' class="pure-input-1-6" name='period_code' type='number' min='0' max='9999'></td>
+            <td>
+                Start date:&nbsp; <input id='from' name='' type='date'/>&nbsp;&nbsp; End date: <input id='to' name='' type='date'/>
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <br/>
+    <table class='pure-table'>
+        <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th class='col'>Receivable Type</th>
+            <th class='col'>Amount</th>
+        </tr>
+        </thead>
+        <tbody id='tablebody'>
+        <tr class='tr_clone entry'>
+            <td><input id='' class="cell" name='' type='text' placeholder='name'></td>
+            <td><input id='' class="cell" name='' type='number' min='0' max='120' placeholder='type'></td>
+            <td><input id='' class="cell" name='' type='number' min='0' max='60' placeholder='amount'></td>
+        <tr>
+</tbody>
+    </table>
+    <br/>
+    <input type='button' class="pure-button tr_clone_add" value='Add new entry'/>
+    <br />
+ 
+</fieldset>
+</form>
+    
+<div id='buttoncontainer'>
+<button id='save' class='pure-button save'>Save Changes</button>
+</div>
+
+<script src="/static/js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+$( ".tr_clone_add" ).click(function(event) {
+    var $clone = $( ".entry:last" ).clone();
+    $clone.find('.cell').val('');
+    $clone.appendTo( "#tablebody" );
+});
+</script>
+{% endblock content%}

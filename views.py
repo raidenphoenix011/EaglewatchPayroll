@@ -25,7 +25,15 @@ def login():
         return redirect(url_for('listDetachmentsManhour'))
     if user == 'payroll_officer':
         session['usertype'] = 'PyO'
-        return redirect(url_for('listDetachmentsPayroll'))   
+        return redirect(url_for('listDetachmentsPayroll'))
+    
+    #----TO BE ADDED -----
+    if user == 'payables_officer':
+        session['usertype'] = 'PbO'
+        return redirect(url_for('listDetachmentsPayables'))
+    if user == 'benefits_officer':
+        session['usertype'] = 'BeO'
+        return redirect(url_for('viewPeriodsBenefits'))
     else:
       return redirect(url_for(user))
   return render_template('login.html')
@@ -119,7 +127,26 @@ def viewPeriodsPayroll(user=None):
 
 @app.route('/payroll/detachments/get/ID/records/Period', methods=['POST', 'GET'])
 def viewPayrollRoster(user=None):
-    return render_template('payroll_roster.html', view='payroll', user=escape(session['user']))
+    return render_template('payroll_roster.html', user=escape(session['user']))
+
+#PAYABLES ----TO BE ADDED ------
+
+@app.route('/payables/detachments', methods=['POST', 'GET'])
+def listDetachmentsPayables(user=None):
+    return render_template('detachment_search_payables.html', user=escape(session['user']))
+
+@app.route('/payables/detachments/get/ID/records', methods=['POST', 'GET'])
+def viewPeriodsPayables(user=None):
+    return render_template('period_search_payables.html', user=escape(session['user']))
+
+@app.route('/payables/detachments/get/id/period', methods=['POST', 'GET'])
+def viewPayables(user=None):
+    return render_template('payables.html', user=escape(session['user']))
+
+#BENEFITS ---TO BE ADDED -----
+
+
+
 
 
 if __name__ == '__main__':

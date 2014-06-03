@@ -4,14 +4,16 @@
 {% block sidebar %}
 
 <div class="sidebar gradient">
+    
     <hr class='navline navline1'/>
     <h2 class='navtitle'>HR SYSTEM</h2>
     <hr class='navline'/>
+    
     <div class='sidebar-menu'>
         <h3>Employee Records</h3>
         <ul class="right">
             <li class="nobullets"><a href='/employees' class='opt2'>View Employee</a></li>
-            <li class="nobullets"><a href='/employees/get' class='opt2'>Add New Employee</a></li>
+            <li class="nobullets"><a href='{{ url_for('addFieldEmployee') }}' class='opt2'>Add New Employee</a></li>
         </ul> 
     </div>
 
