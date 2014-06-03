@@ -1,4 +1,5 @@
 from flask import Flask, render_template, session, escape, request, redirect, url_for
+import db
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
@@ -24,7 +25,15 @@ def login():
         return redirect(url_for('listDetachmentsManhour'))
     if user == 'payroll_officer':
         session['usertype'] = 'PyO'
-        return redirect(url_for('listDetachmentsPayroll'))   
+        return redirect(url_for('listDetachmentsPayroll'))
+    
+    #----TO BE ADDED -----
+    if user == 'payables_officer':
+        session['usertype'] = 'PbO'
+        return redirect(url_for('listDetachmentsPayables'))
+    if user == 'benefits_officer':
+        session['usertype'] = 'BeO'
+        return redirect(url_for('viewPeriodsBenefits'))
     else:
       return redirect(url_for(user))
   return render_template('login.html')
@@ -40,22 +49,11 @@ def admin(user=None):
 
 @app.route('/employees', methods=['POST', 'GET'])
 def listEmployees(user=None):
-  field_employee1 = FieldEmployee(1,'SG', 'FE001234', 'Jr.', "D'Agosto", 'Nicholas', 'Smith', '9323232', '09178287292', 'Commonwealth, Q.C.', '02-03-1989', 'M', 'S', 0, 'driving', '01/02/2014', '', 'resigned', 'C', 'E')
-  field_employee2 = FieldEmployee(2,'SG', 'FE002345', 'IV', 'Naharis', 'Dario', 'Sunter', '9323232', '09178287292', 'Commonwealth, Q.C.', '02-03-1989', 'M', 'S', 0, 'driving', '01/02/2014', '', 'active', 'C', 'E')
-  field_employee3 = FieldEmployee(3,'SV', 'FE003456', 'Jr.', 'Hoult', 'Nick', 'Smith', '9323232', '09178287292', 'Commonwealth, Q.C.', '02-03-1989', 'M', 'S', 0, 'driving', '01/02/2014', '', 'resigned', 'C', 'E')
-  field_employee4 = FieldEmployee(4,'SV', 'FE003456', 'Jr.', 'Lannister', 'Jamie', 'Targaryen', '9323232', '09178287292', 'Commonwealth, Q.C.', '02-03-1989', 'M', 'S', 0, 'driving', '01/02/2014', '', 'awol', 'C', 'E')
-  field_employees = [field_employee1, field_employee2, field_employee3, field_employee4]
-  #field_employees = getAllFieldEmployees()
-  return render_template('employee_search.html', FEs = field_employees, user=escape(session['user']))
+  return render_template('employee_search.html', FEs = db.getAllFieldEmployees(), user=escape(session['user']))
   
 @app.route('/employees/get/<ID>', methods=['POST', 'GET'])
 def viewEmployee(ID, user=None):
-    #field_employee= getEmployee(ID)
-  if ID == '1':
-    field_employee = FieldEmployee(1,'SG', 'FE001234', 'Jr.', "D'Agosto", 'Nicholas', 'Smith', '9323232', '09178287292', 'Commonwealth, Q.C.', '02-03-1989', 'M', 'S', 0, 'driving', '01/02/2014', '', 'resigned', 'C', 'E')
-  else:
-    field_employee = FieldEmployee(1,'SG', 'FE001234', 'Jr.', "Hoult", 'Nicholas', 'Smith', '9323232', '09178287292', 'Commonwealth, Q.C.', '02-03-1989', 'M', 'S', 0, 'driving', '01/02/2014', '', 'resigned', 'C', 'E')
-  return render_template('employee.html', FE = field_employee, user=escape(session['user']), )
+  return render_template('employee.html', FE = db.getEmployee(ID), user=escape(session['user']), )
 
 @app.route('/employees/add', methods=['POST', 'GET'])
 def addFieldEmployee(user=None):
@@ -129,7 +127,26 @@ def viewPeriodsPayroll(user=None):
 
 @app.route('/payroll/detachments/get/ID/records/Period', methods=['POST', 'GET'])
 def viewPayrollRoster(user=None):
-    return render_template('payroll_roster.html', view='payroll', user=escape(session['user']))
+    return render_template('payroll_roster.html', user=escape(session['user']))
+
+#PAYABLES ----TO BE ADDED ------
+
+@app.route('/payables/detachments', methods=['POST', 'GET'])
+def listDetachmentsPayables(user=None):
+    return render_template('detachment_search_payables.html', user=escape(session['user']))
+
+@app.route('/payables/detachments/get/ID/records', methods=['POST', 'GET'])
+def viewPeriodsPayables(user=None):
+    return render_template('period_search_payables.html', user=escape(session['user']))
+
+@app.route('/payables/detachments/get/id/period', methods=['POST', 'GET'])
+def viewPayables(user=None):
+    return render_template('payables.html', user=escape(session['user']))
+
+#BENEFITS ---TO BE ADDED -----
+
+
+
 
 
 if __name__ == '__main__':

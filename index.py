@@ -77,7 +77,7 @@ def newfe():
 
 @app.route('/gafe')
 def gafe():
-  return render_template('test.html', FieldEmployees=db.getAllFieldEmployees())
+  return render_template('test.html', FieldEmployees=db.getEmployee(2))
 
 @app.route('/gofe')
 def gofe():

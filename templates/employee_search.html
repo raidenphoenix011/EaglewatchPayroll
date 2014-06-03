@@ -45,7 +45,7 @@
       {% for FE in FEs %}
       <tr>
         <td class="id" style="display:none;">1</td>
-        <td class="code">{{ FE.ID }}</td>
+        <td class="code">{{ FE.FECode }}</td>
         <td class="name"><a href='{{ url_for('viewEmployee', ID=FE.ID) }}'>{{ FE.FirstName }} {{ FE.LastName }}</a></td>
         <td class="status">{{ FE.EmpStatus }}</td>
       </tr>

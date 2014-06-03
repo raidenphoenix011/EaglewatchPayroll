@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>PAYABLES SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Payable Records</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayables') }}' class='opt2'>View Record</a></li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayables') }}' class='opt2'>Add Record</a></li>
+        </ul> 
+    </div>
+
+</div>
+{% endblock sidebar %}
+
+{% block content %}
+
+<h1>Accenture Payables</h1>
+<hr>
+<!--{% for company in companies %}
+{% endfor %}-->
+<br/>
+<div id="periods">
+  <form class='pure-form pure-form-aligned' method='link' action='{{ url_for('viewPayables') }}'>
+    <button class='pure-button'>Add New Payable Record</button>
+  </form>
+  <br/><br/><br/>
+  <form class='pure-form pure-form-aligned'>
+    <label>Search Record: </label><input type="text" class="search" placeholder="Enter period code, start date, or end date" />
+  </form>
+  <br/>
+  <table class='search-results pure-table'>
+    <thead>
+      <tr>
+        <th class="sort" data-sort="period">Period</th>
+        <th class="sort" data-sort="start">Start Date</th>
+	<th class="sort" data-sort="end">End Date</th>
+      </tr>
+    </thead>
+
+    <tbody class="list">
+      <tr>
+        <td class="period"><a href='{{ url_for('viewPayables') }}'>0114</a></td>
+        <td class="start">Jan. 1, 2014</td>
+	<td class="end">Jan. 15, 2014</td>
+      </tr>
+      <tr>
+        <td class="period">0214</td>
+        <td class="start">Jan. 16, 2014</td>
+	<td class="end">Jan. 31, 2014</td>
+      </tr>
+      <tr>
+        <td class="period">0314</td>
+        <td class="start">Feb. 1, 2014</td>
+	<td class="end">Feb. 15, 2014</td>
+      </tr>
+      <tr>
+        <td class="period">0414</td>
+        <td class="start">Feb. 16, 2014</td>
+	<td class="end">Feb. 28, 2014</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<script>
+var options = {
+  valueNames: [ 'period', 'start', 'end' ]
+};
+
+// Init list
+var periodList = new List('periods', options);
+
+var periodField = $('#period-field'),
+    startField = $('#start-field'),
+    endField = $('#end-field');
+
+refreshCallbacks();
+
+</script>
+    
+{% endblock content %}

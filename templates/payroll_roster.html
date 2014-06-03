@@ -27,20 +27,28 @@
 <h2>Period: </h2>
 <h2>Detachment: </h2>
 
-<table>
+<table class='pure-table'>
     <tr>
+        <th></th>
         <th>Name</th>
     </tr>
     <tr>
+        <td>1</td>
         <td>
             <a href='{{ url_for('viewPayroll') }}'>Guard1</a>
         </td>
     </tr>
     <tr>
         <td>
+            2
+        </td>
+        <td>
             <a href='{{ url_for('viewPayroll') }}'>Guard2</a>
         </td>
     </tr>
 </table>
-
+<br/>
+<form method='link' action='{{ url_for('viewPayrollRoster') }}'>
+    <input type='button' value='Process Payroll' class='pure-button'/>
+</form>
 {% endblock content%}
