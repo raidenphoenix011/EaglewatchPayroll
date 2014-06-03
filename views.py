@@ -14,13 +14,17 @@ def login():
     session['user'] = request.form['username']
     user = session['user']
     if user == 'HR_officer':
-      return redirect(url_for('listEmployees'))
+        session['usertype'] = 'HR'
+        return redirect(url_for('listEmployees'))
     if user == 'billing_officer':
-      return redirect(url_for('listClients'))   
+        session['usertype'] = 'Bio'
+        return redirect(url_for('listClients'))   
     if user == 'manhour_officer':
-      return redirect(url_for('addManhour'))
+        session['usertype'] = 'MO'
+        return redirect(url_for('addManhour'))
     if user == 'payroll_officer':
-      return redirect(url_for('addPayroll'))   
+        session['usertype'] = 'PyO'
+        return redirect(url_for('addPayroll'))   
     else:
       return redirect(url_for(user))
   return render_template('login.html')
@@ -92,9 +96,9 @@ def manhour(user=None):
 def listDetachments(mod, user=None):
   if mod == 'detachment':
     return render_template('detachment_search.html', user=escape(session['user']), navtitle='CLIENT RECORDS', mode='viewDetachment')
-  if mod=='payroll':
+  elif mod == 'payroll':
     return render_template('detachment_search.html', user=escape(session['user']), navtitle='PAYROLL SYSTEM', mode='viewPeriods')
-  elif mod=='manhour':
+  elif mod == 'manhour':
     return render_template('detachment_search.html', user=escape(session['user']), navtitle='MANHOUR RECORDS', mode='viewPeriods')
 
 @app.route('/payroll', methods=['POST', 'GET'])

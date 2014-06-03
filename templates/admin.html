@@ -11,8 +11,8 @@
         <ul id='navbar'>
             <li><h4><a href='{{ url_for('listEmployees') }}' class='opt'>HR System</a></h4></li>
             <li><h4><a href='{{ url_for('listClients') }}' class='opt'>Client Database</a></h4></li>
-            <li><h4><a href='{{ url_for('searchDetachment', mod='manhour') }}' class='opt'>Manhour System</a></h4></li>
-            <li><h4><a href='{{ url_for('searchDetachment', mod='payroll') }}' class='opt'>Payroll System</a></h4></li>
+            <li><h4><a href='{{ url_for('listDetachments', mod='manhour') }}' class='opt'>Manhour System</a></h4></li>
+            <li><h4><a href='{{ url_for('listDetachments', mod='payroll') }}' class='opt'>Payroll System</a></h4></li>
         </ul>
 
     </div>
