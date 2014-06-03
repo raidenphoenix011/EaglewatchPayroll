@@ -17,14 +17,14 @@ def login():
         session['usertype'] = 'HR'
         return redirect(url_for('listEmployees'))
     if user == 'billing_officer':
-        session['usertype'] = 'Bio'
+        session['usertype'] = 'BiO'
         return redirect(url_for('listClients'))   
     if user == 'manhour_officer':
         session['usertype'] = 'MO'
-        return redirect(url_for('addManhour'))
+        return redirect(url_for('listDetachments'))
     if user == 'payroll_officer':
         session['usertype'] = 'PyO'
-        return redirect(url_for('addPayroll'))   
+        return redirect(url_for('listDetachments'))   
     else:
       return redirect(url_for(user))
   return render_template('login.html')
@@ -65,7 +65,7 @@ def addFieldEmployee(user=None):
 
 @app.route('/clients', methods=['POST', 'GET'])
 def listClients(user=None):
-  return render_template('client_search.html', user=escape(session['user']))
+  return render_template('client_search.html', goto='listDetachments', user=escape(session['user']))
 
 #@app.route('/clients/get/<ID>', methods=['POST', 'GET'])
 #def client(ID, user=None):
@@ -92,14 +92,27 @@ def addManhour(user=None):
 def manhour(user=None):
   return render_template('manhour.html', user=escape(session['user']), dept='manhour')
 
-@app.route('/detachments/<mod>', methods=['POST', 'GET'])
-def listDetachments(mod, user=None):
-  if mod == 'detachment':
-    return render_template('detachment_search.html', user=escape(session['user']), navtitle='CLIENT RECORDS', mode='viewDetachment')
-  elif mod == 'payroll':
-    return render_template('detachment_search.html', user=escape(session['user']), navtitle='PAYROLL SYSTEM', mode='viewPeriods')
-  elif mod == 'manhour':
-    return render_template('detachment_search.html', user=escape(session['user']), navtitle='MANHOUR RECORDS', mode='viewPeriods')
+@app.route('/detachments', methods=['POST', 'GET'])
+def listDetachments(user=None):
+  if session['usertype']=='BiO':
+    return render_template('detachment_search.html', user=escape(session['user']),  goto='viewDetachment',navtitle='CLIENT RECORDS', mode='viewDetachment')
+  elif session['usertype'] == 'PyO':
+    return render_template('detachment_search.html', user=escape(session['user']), goto='payroll', navtitle='PAYROLL SYSTEM', mode='viewPeriods')
+  elif session['usertype'] == 'MO':
+    return render_template('detachment_search.html', user=escape(session['user']),  goto='manhour',navtitle='MANHOUR RECORDS', mode='viewPeriods')
+  else:
+    return render_template('detachment_search.html', user=escape(session['user']), navtitle='NO USER TYPE', mode='viewPeriods')
+
+@app.route('/detachments/<usertype>', methods=['POST', 'GET'])
+def listDetachmentsAdmin(usertype, user=None):
+  if usertype =='BiO':
+    return render_template('detachment_search.html', user=escape(session['user']),  goto='viewDetachment',navtitle='CLIENT RECORDS', mode='viewDetachment')
+  elif usertype == 'PyO':
+    return render_template('detachment_search.html', user=escape(session['user']), goto='payroll', navtitle='PAYROLL SYSTEM', mode='viewPeriods')
+  elif usertype == 'MO':
+    return render_template('detachment_search.html', user=escape(session['user']),  goto='manhour',navtitle='MANHOUR RECORDS', mode='viewPeriods')
+  else:
+    return render_template('detachment_search.html', user=escape(session['user']), navtitle='NO USER TYPE', mode='viewPeriods')
 
 @app.route('/payroll', methods=['POST', 'GET'])
 def payroll(user=None):
@@ -107,8 +120,12 @@ def payroll(user=None):
 
 @app.route('/manhour/detachments/get/ID/records', methods=['POST', 'GET'])
 def viewPeriods(user=None):
-  return render_template('period_search.html', user=escape(session['user']))
-
+  if session['usertype']=='MO':
+    return render_template('period_search.html', user=escape(session['user']))
+  if session['usertype']=='PyO':
+    return render_template('period_search.html', user=escape(session['user']))
+  else:
+    return render_template('admin.html', user=escape(session['user']))
 if __name__ == '__main__':
     app.debug = True
     app.run()
