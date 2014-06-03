@@ -1,0 +1,163 @@
+
+/*GENERAL*/
+
+body {
+    font-family: FreeSans,Arimo,'Droid Sans',Helvetica,Arial,sans-serif;
+    
+}
+td {
+    padding:5px;
+    padding-left: 5px;
+}
+
+
+.search {
+    width:500px;
+}
+
+/*SIDE NAVBAR*/
+
+.navline {
+    width:103%;
+    margin-left: -4%;
+}
+.navline1 {
+    margin-top: 30%;
+}
+.navtitle {
+    margin:0;
+    padding:0;
+    margin-left: -5%;
+    text-align: center;
+}
+
+#navbar {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    color:black;
+}
+
+/* EMPLOYEE/CLIENT/DETACHMENT SEARCH */
+.search-results {
+    width:600px;
+}
+
+.search-results{
+    width:600px;
+}
+
+.search-results th{
+    text-align: center;
+}
+
+
+/*EMPLOYEE RECORD*/
+
+
+#guard_info {
+    font-size: 18px;
+}
+
+#emp_code {
+    width:150px;   
+}
+
+#position {
+    width:150px;
+}
+
+#status {
+    width:150px;
+}
+
+#last_name, #first_name, #middle_name {
+    width:150px;
+}
+
+#suffix {
+    width:70px;
+}
+
+#date_hired {
+    width:150px;
+}
+
+
+#save {
+    float:right;
+}
+
+/* CLIENT FORM client.html*/
+.codebox {
+    width:110px;
+}
+.namebox {
+    width:320px;
+}
+.detachmentcode {
+    width:130px;
+}
+
+#contact_name-field {
+    width:170px;
+}
+
+#position-field {
+    width:150px;
+}
+
+#number-field {
+    width:155px;
+}
+
+#search_contact {
+    width:225px;
+}
+
+/*ADMIN NAVBAR*/
+
+a.opt:link,a:visited
+{
+display:block;
+width:160px;
+font-weight:bold;
+color:black;
+background-color:white;
+text-align:center;
+padding:10px;
+text-decoration:none;
+text-transform:uppercase;
+border-radius: 10px;
+margin-left: 30px;
+}
+a.opt:hover,a:active
+{
+background-color:gray;
+color:white;
+}
+
+
+/* NORMAL NAVBAR*/
+
+a.opt2 {
+    margin-bottom:10px;
+}
+a.opt2:link,a:visited
+{
+display:block;
+width:180px;
+font-weight:bold;
+color:black;
+background-color:white;
+text-align:center;
+padding:10px;
+margin-left: -20px;
+text-decoration:none;
+border-radius: 10px;
+}
+a.opt2:hover,a:active
+{
+background-color:gray;
+color:white;
+}

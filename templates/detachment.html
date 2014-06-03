@@ -1,0 +1,347 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>CLIENT RECORDS</h2>
+    <hr class='navline'/>
+    <div class='sidebar-menu'>
+        <h4>Client Information</h4>
+        <ul class="right">
+            <li class="nobullets">View Record</li>
+            <li class="nobullets">Add New Record</li>
+        </ul> 
+        <h4>Detachment Information</h4>
+        <ul class="right">
+            <li class="nobullets">View Record</li>
+            <li class="nobullets">Add New Record</li>
+        </ul> 
+
+    </div>
+
+</div>
+{% endblock sidebar %}
+
+
+{% block content %}
+<h1>Detachment Information</h1>
+<hr>
+<div class=''>
+<h2>Detachment Name</h2>
+
+<form class='pure-form pure-form-aligned'>
+
+<br/>
+    <label>Code: </label><input class='detachmentcode' id='det_code' type='text' value='' disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Detachment Name: </label><input class='namebox' id='det_name' type='text' value=''/>
+<br/><br/>
+</form>
+
+</div>
+<br/>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Basic</a></li>
+    <li><a href="#tabs-2">Authorized Manhours</a></li>
+    <li><a href="#tabs-3">Manhour Adjustment</a></li>
+    <li><a href="#tabs-4">Payroll Rates</a></li>
+    <li><a href="#tabs-5">Allowances</a></li>
+    <li><a href="#tabs-6">Contact Persons</a></li>
+  </ul>
+    <div id="tabs-1">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+        <tr>
+            <td><label>Status: </label></td>
+            <td>
+                <select name="det_status">
+                    <option value="P">Pending</option>
+                    <option value="A">Active</option>
+                    <option value="T">Terminated</option>
+                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Start Date: </label></td>
+            <td><input type='date' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Termination Date: </label></td>
+            <td><input type='date' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>City: </label></td>
+            <td><input type='text' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Address: </label></td>
+            <td><textarea cols='22' rows='2'></textarea></td>
+        </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-2">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+        <tr>
+            <td><label>Workdays: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Saturdays: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Sundays/Holidays: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-3">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+    <tr>
+    <td><label>Date: </label></td>
+    <td><input type='date' value=''/></td>
+    </tr>
+    <tr>
+    <td><label>Amount Increased/Decreased: </label></td>
+    <td><input type='number' value=''/></td>
+    </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-4">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+        <tr>
+            <td><label>Effective Date: </label></td>
+            <td><input type='date' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Rate type:</label></td>
+            <td>
+                <select name="rate_type">
+                    <option value="H">Hourly</option>
+                    <option value="M">Monthly</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Regular: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>OT: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Night differential: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>ECOLA (daily): </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Legal Holiday: </label></td>
+            <td><input type='number' value=''/></td>
+            <td><label>Mode of Release: </label></td>
+            <td>
+                <select name="LH_MOR">
+                    <option value="PD">Pay Day</option>
+                    <option value="YE">Year End</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Special Holiday: </label></td>
+            <td><input type='number' value=''/></td>
+            <td><label>Mode of Release: </label></td>
+            <td>
+                <select name="SH_MOR">
+                    <option value="PD">Pay Day</option>
+                    <option value="YE">Year End</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>5-days Incentive: </label></td>
+            <td><input type='number' value=''/></td>
+            <td><label>Mode of Release: </label></td>
+            <td>
+                <select name="SH_MOR">
+                    <option value="PD">Pay Day</option>
+                    <option value="YE">Year End</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>13th Month: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Pag-ibig Premium: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>PhilHealth Premium: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-5">
+    <form class='pure-form pure-form-aligned'>
+        <tr>
+            <td><label>Allowance amount: </label></td>
+            <td><input type='number' value=''/></td>
+        </tr>
+    </form>
+  </div>
+    <div id="tabs-6">
+        <div id="contacts">
+        <form class='pure-form'>
+          <table class='pure-table'>
+            <thead>
+              <tr>
+                <th class="sort" data-sort="contact_name">Name</th>
+                <th class="sort" data-sort="position">Position</th>
+                <th class="sort" data-sort="number">Contact Number</th>
+                <th colspan="2">
+                  <input type="text" class="search" placeholder="Search contact" id='search_contact' />
+                </th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td class="contact_id" style="display:none;">1</td>
+                <td class="contact_name">Mr. Hugh Jackman</td>
+                <td class="position">Area Manager</td>
+                <td class="number">09178232323</td>
+                <td class="edit"><button class="edit-item-btn pure-button">Update</button></td>
+                <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+              </tr> 
+              <tr>
+                <td class="contact_id" style="display:none;">2</td>
+                <td class="contact_name">Mr. Harry Styles</td>
+                <td class="position">Security Manager</td>
+                <td class="number">091783434333</td>
+                <td class="edit"><button class="edit-item-btn pure-button">Update</button></td>
+                <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+              </tr>
+              <tr>
+                <td class="contact_id" style="display:none;">3</td>
+                <td class="contact_name">Ms. Eva Longoria</td>
+                <td class="position">Secretary</td>
+                <td class="number">09178232323</td>
+                <td class="edit"><button class="edit-item-btn pure-button">Update</button></td>
+                <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <br/>
+          <table>
+            <td class="contact_name">
+              <input type="hidden" id="contact_id-field" />
+              <input type="text" id="contact_name-field" placeholder="name" />
+            </td>
+            <td class="position">
+              <input type="text" id="position-field" placeholder="position" />
+            </td>
+            <td class="number">
+              <input type="text" id="number-field" placeholder="contact number" />
+            </td>
+            <td class="add">
+              <button id="add-btn" class="pure-button">Add to Contacts</button>
+              <button id="edit-btn" class="pure-button">Update Contact</button>
+            </td>
+          </table>
+        </form>
+        </div>
+  </div>
+
+
+</div>
+<br/>
+<div id='buttoncontainer'>
+<button id='save' class='pure-button save'>Save Changes</button>
+</div>
+
+
+<!------SCRIPT FOR ListJS search contact ------->
+<script>
+var client_options = {
+  valueNames: [ 'contact_id', 'contact_name', 'position', 'number' ]
+};
+
+// Init list
+var contactList = new List('contacts', client_options);
+
+var contact_idField = $('#contact_id-field'),
+    contact_nameField = $('#contact_name-field'),
+    positionField = $('#position-field'),
+    numberField = $('#number-field'),
+    addBtn = $('#add-btn'),
+    editBtn = $('#edit-btn').hide(),
+    removeBtns = $('.remove-item-btn'),
+    editBtns = $('.edit-item-btn');
+
+// Sets callbacks to the buttons in the list
+refreshCallbacks();
+
+addBtn.click(function() {
+  contactList.add({
+    contact_id: Math.floor(Math.random()*110000),
+    contact_name: contact_nameField.val(),
+    position: positionField.val(),
+    number: numberField.val()
+  });
+  clearFields();
+  refreshCallbacks();
+});
+
+editBtn.click(function() {
+  var item = contactList.get('contact_id', contact_idField.val())[0];
+  item.values({
+    contact_id:contact_idField.val(),
+    contact_name: contact_nameField.val(),
+    position: positionField.val(),
+    number: numberField.val()
+  });
+  clearFields();
+  editBtn.hide();
+  addBtn.show();
+});
+
+function refreshCallbacks() {
+  // Needed to add new buttons to jQuery-extended object
+  removeBtns = $(removeBtns.selector);
+  editBtns = $(editBtns.selector);
+  
+  removeBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.contact_id').text();
+    contactList.remove('contact_id', itemId);
+  });
+  
+  editBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.contact_id').text();
+    var itemValues = contactList.get('contact_id', itemId)[0].values();
+    contact_idField.val(itemValues.contact_id);
+    contact_nameField.val(itemValues.contact_name);
+    positionField.val(itemValues.position);
+    numberField.val(itemValues.number);
+    
+    editBtn.show();
+    addBtn.hide();
+  });
+}
+
+function clearFields() {
+  contact_nameField.val('');
+  positionField.val('');
+  numberField.val('');
+}    
+</script>    
+{% endblock content %}

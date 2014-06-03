@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+    
+<div class="sidebar gradient">
+    
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>HR SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h3>Employee Records</h3>
+        <ul class="right">
+            <li class="nobullets"><a href='/employees' class='opt2'>View Employee</a></li>
+            <li class="nobullets"><a href='{{ url_for('addFieldEmployee') }}' class='opt2'>Add New Employee</a></li>
+        </ul> 
+        <h3>HR Reports</h3>
+        <ul class="right">
+            <li class="nobullets"><a href='' class='opt2'>Health Status</a></li>
+            <li class="nobullets"><a href='' class='opt2'>201 Files Status</a></li>
+        </ul> 
+    </div>
+
+</div>
+
+{% endblock sidebar %}
+
+{% block content %}
+
+<h1>Employee Search</h1>
+<br/>
+<!--{% for employee in employees %}
+{% endfor %} -->
+    
+<div id="employees">
+  <form class='pure-form pure-form-aligned'>
+    <input type="text" class="search" placeholder="Enter employee code, name, or status" />
+  </form>
+  <br/>
+  <table class='search-results pure-table'>
+    <thead>
+      <tr>
+        <th class="sort" data-sort="code">Code</th>
+        <th class="sort" data-sort="name">Name</th>
+        <th class="sort" data-sort="status">Status</th>
+      </tr>
+    </thead>
+
+    <tbody class="list">
+      {% for FE in FEs %}
+      <tr>
+        <td class="id" style="display:none;">1</td>
+        <td class="code">{{ FE.ID }}</td>
+        <td class="name"><a href='{{ url_for('viewEmployee', ID=FE.ID) }}'>{{ FE.FirstName }} {{ FE.LastName }}</a></td>
+        <td class="status">{{ FE.EmpStatus }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<script>
+var options = {
+  valueNames: [ 'id', 'code', 'name', 'status' ]
+};
+
+// Init list
+var employeeList = new List('employees', options);
+
+var idField = $('#id-field'),
+    codeField = $('#code-field'),
+    nameField = $('#name-field'),
+    statusField = $('#status-field');
+
+refreshCallbacks();
+
+</script>
+    
+{% endblock content %}

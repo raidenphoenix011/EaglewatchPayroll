@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>CLIENT RECORDS</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Client Information</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('client') }}' class='opt2'>View Client</a></li>
+            <li class="nobullets"><a href='{{ url_for('addClient') }}' class='opt2'>Add New Client</a></li>
+        </ul> 
+        <h4>Detachment Information</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='/detachments' class='opt2'>View Detachment</a></li>
+        </ul> 
+    </div>
+
+</div>
+
+{% endblock sidebar %}
+
+{% block content %}
+
+<h1>Client Search</h1>
+
+<!--{% for company in companies %}
+{% endfor %}-->
+
+<div id="clients">
+  <form class='pure-form pure-form-aligned'>
+    <input type="text" class="search" placeholder="Enter client code, name, city, or status" />
+  </form>
+  <br/>
+  <table class='search-results pure-table'>
+    <thead>
+      <tr>
+        <th class="sort" data-sort="code">Code</th>
+        <th class="sort" data-sort="name">Client Name</th>
+	<th class="sort" data-sort="city">City</th>
+        <th class="sort" data-sort="status">Status</th>
+      </tr>
+    </thead>
+
+    <tbody class="list">
+      <tr>
+        <td class="id" style="display:none;">1</td>
+        <td class="code">C1234</td>
+        <td class="name"><a href='/clients/get'>Accenture</a></td>
+	<td class="city">Taguig</td>
+        <td class="status">Active</td>
+      </tr>
+      <tr>
+        <td class="id" style="display:none;">2</td>
+        <td class="code">C4354</td>
+        <td class="name">Mcdonalds</td>
+        <td class="city">Makati</td>
+        <td class="status">Pending</td>
+      </tr>
+      <tr>
+        <td class="id" style="display:none;">3</td>
+        <td class="code">C4354</td>
+        <td class="name">Canon</td>
+        <td class="city">Laguna</td>
+        <td class="status">Terminated</td>
+      </tr>
+      <tr>
+        <td class="id" style="display:none;">4</td>
+        <td class="code">C3245</td>
+        <td class="name">Ateneo</td>
+        <td class="city">Quezon City</td>
+        <td class="status">Active</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<script>
+var options = {
+  valueNames: [ 'id', 'code', 'name', 'city', 'status' ]
+};
+
+// Init list
+var clientList = new List('clients', options);
+
+var idField = $('#id-field'),
+    codeField = $('#code-field'),
+    nameField = $('#name-field'),
+    cityField = $('#city-field'),
+    statusField = $('#status-field');
+
+refreshCallbacks();
+
+</script>
+    
+{% endblock content %}
