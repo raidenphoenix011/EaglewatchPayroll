@@ -808,6 +808,24 @@ BEGIN
 	ID = iID AND FieldEmpID = iFieldEmpID AND Balance > 0;
 END $$
 #CALL updateCalamityLoan(ID,FieldEmpID);
+
+CREATE PROCEDURE getSSSCon(
+	iFieldEmpID INT,
+	OUT EEAmt DECIMAL(10,2)	)
+BEGIN
+	SELECT (m.RegHours * r.Regular),(m.OTHours * r.Overtime), (m.NightHours * r.NDifferential), (m.NoOfFullDays * r.ECOLA) 
+	INTO @RegPay, @OT,@Night,@ECOLAPay
+	FROM ManHourLogs m
+	INNER JOIN Detachments d ON m.DetachID = d.ID
+	INNER JOIN FieldEmployees fe ON m.FieldEmpID = fe.ID
+	INNER JOIN Rates r ON d.RateID = r.ID
+	WHERE m.NoOfFullDays <> 0 AND fe.ID = iFieldEmpID;
+	
+	SELECT EE INTO @Amt FROM SSSContributions WHERE PriceFrom <= (@RegPay + @OT + @Night + @ECOLAPay) AND PriceTo >= (@RegPay + @OT + @Night + @ECOLAPay);
+	SET EEAmt = @Amt;
+END $$
+#CALL getSSSCon(3,@Amt);SELECT @Amt;
+
 #########################################################################
 
 
