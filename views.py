@@ -127,6 +127,10 @@ def viewPeriodsManhour(user=None):
 def viewPeriodsPayroll(user=None):
     return render_template('period_search_payroll.html', view='payroll', user=escape(session['user']))
 
+@app.route('/payroll/detachments/get/ID/records/Period', methods=['POST', 'GET'])
+def viewPayrollRoster(user=None):
+    return render_template('payroll_roster.html', view='payroll', user=escape(session['user']))
+
 
 if __name__ == '__main__':
     app.debug = True

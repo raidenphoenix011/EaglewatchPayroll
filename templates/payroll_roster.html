@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>PAYROLL SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Payroll Records</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayroll') }}' class='opt2'>View Record</a></li>
+            <li class="nobullets"><a href='{{ url_for('listDetachmentsPayroll') }}' class='opt2'>Add Record</a></li>
+        </ul> 
+    </div>
+
+</div>
+{% endblock sidebar %}
+
+
+{% block content %}
+
+    <h1>Payroll Roster</h1>
+    <hr>
+        
+<h2>Period: </h2>
+<h2>Detachment: </h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    <tr>
+        <td>
+            <a href='{{ url_for('viewPayroll') }}'>Guard1</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href='{{ url_for('viewPayroll') }}'>Guard2</a>
+        </td>
+    </tr>
+</table>
+
+{% endblock content%}

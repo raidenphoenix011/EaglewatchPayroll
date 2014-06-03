@@ -26,8 +26,8 @@
 {% endfor %}-->
 <br/>
 <div id="periods">
-  <form class='pure-form pure-form-aligned' method='link' action='{{ url_for('viewPayroll') }}'>
-    <button class='pure-button'>Add New Payroll Record</button>
+  <form class='pure-form pure-form-aligned' method='link' action='{{ url_for('viewPayrollRoster') }}'>
+    <button class='pure-button'>Process Latest Payroll</button>
   </form>
   <br/><br/><br/>
   <form class='pure-form pure-form-aligned'>
@@ -45,7 +45,7 @@
 
     <tbody class="list">
       <tr>
-        <td class="period"><a href='{{ url_for('viewPayroll') }}'>0114</a></td>
+        <td class="period"><a href='{{ url_for('viewPayrollRoster') }}'>0114</a></td>
         <td class="start">Jan. 1, 2014</td>
 	<td class="end">Jan. 15, 2014</td>
       </tr>
