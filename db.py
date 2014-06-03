@@ -1,5 +1,30 @@
 import MySQLdb, hashlib, cgi, cgitb; cgitb.enable()
-import FieldEmployees, Clients, Detachments
+import import_file
+
+Allowances = import_file.import_file('models/Allowances.py')
+AuthorizedManHours = import_file.import_file('models/AuthorizedManHours.py')
+ClientContactPersons = import_file.import_file('models/ClientContactPersons.py')
+Clients = import_file.import_file('models/Clients.py')
+DetachmentContactPersons = import_file.import_file('models/DetachmentContactPersons.py')
+Detachments = import_file.import_file('models/Detachments.py')
+FieldEmployees = import_file.import_file('models/FieldEmployees.py')
+FieldEmployeeTypes = import_file.import_file('models/FieldEmployeeTypes.py')
+HolidayMOR = import_file.import_file('models/HolidayMOR.py')
+IncentiveMOR = import_file.import_file('models/IncentiveMOR.py')
+Logs = import_file.import_file('models/Logs.py')
+ManHourLogs = import_file.import_file('models/ManHourLogs.py')
+OfficeEmployees = import_file.import_file('models/OfficeEmployees.py')
+OfficeEmployeeTypes = import_file.import_file('models/OfficeEmployeeTypes.py')
+PagibigCalamityLoans = import_file.import_file('models/PagibigCalamityLoans.py')
+PagibigSalaryLoans = import_file.import_file('models/PagibigSalaryLoans.py')
+PayrollRecord = import_file.import_file('models/PayrollRecord.py')
+PersonalPayables = import_file.import_file('models/PersonalPayables.py')
+Rates = import_file.import_file('models/Rates.py')
+RateType = import_file.import_file('models/RateType.py')
+Receivables = import_file.import_file('models/Receivables.py')
+SSSContributions = import_file.import_file('models/SSSContributions.py')
+SSSLoans = import_file.import_file('models/SSSLoans.py')
+UniformDeposits = import_file.import_file('models/UniformDeposits.py')
 
 mysql = MySQLdb.connect('localhost','AdminPayroll','Password','Eaglewatch')
 cur = mysql.cursor()
@@ -55,9 +80,9 @@ def SubList(tableName, foreignKey, value):
   return res
 
 def getAllFieldEmployees():
-  sql = "SELECT f.ID, ft.Description, f.FECode, f.DisplayCode, f.Suffix, f.LastName, f.FirstName, f.MiddleName, f.Landline, f.MobileNo, f.Address, f.BirthDate, f.Gender, f.CivilStatus, f.Dependents,f.Skills, f.DateHired, f.DateResigned, f.FieldEmpStatus, f.CholStatus, f.FileStatus FROM FieldEmployees f INNER JOIN FieldEmployeeTypes ft ON f.Type = ft.Type WHERE f.ID = 1;"
-  res = getAll(sql)
-  #res = List("FieldEmployees")
+  #sql = "SELECT f.ID, ft.Description, f.FECode, f.DisplayCode, f.Suffix, f.LastName, f.FirstName, f.MiddleName, f.Landline, f.MobileNo, f.Address, f.BirthDate, f.Gender, f.CivilStatus, f.Dependents,f.Skills, f.DateHired, f.DateResigned, f.FieldEmpStatus, f.CholStatus, f.FileStatus FROM FieldEmployees f INNER JOIN FieldEmployeeTypes ft ON f.Type = ft.Type ;"
+  #res = getAll(sql)
+  res = List("FieldEmployees")
   FieldEmployeeList = []
   for row in res:
     if row is not None:

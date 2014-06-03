@@ -2,9 +2,11 @@ import db
 
 class FieldEmployees(object):
 
-  def __init__(self, Type, DisplayCode, Suffix, LastName, FirstName, MiddleName, Landline, MobileNo, Address, Birthdate, Gender, CivilStatus, Dependents, Skills, DateHired, DateResigned, EmpStatus, CholesterolStatus, FileStatus):
+  def __init__(self, ID, Type, FECode, DisplayCode, Suffix, LastName, FirstName, MiddleName, Landline, MobileNo, Address, Birthdate, Gender, CivilStatus, Dependents, Skills, DateHired, DateResigned, EmpStatus, CholesterolStatus, FileStatus):
   
+    self.ID=ID
     self.type=Type
+    self.FECode=FECode
     self.DisplayCode=DisplayCode
     self.Suffix=Suffix
     self.LastName=LastName

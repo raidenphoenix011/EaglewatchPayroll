@@ -42,20 +42,3 @@ class OfficeEmployees(object):
     sql = "update OfficeEmployees set %s=%s where ID = %s"
     params =(prop, val, self.ID)
     return db.set(sql,params)
-
-/////// 
-  
-  def getAllFieldEmployees()
-    
-    
-
-  def getMaxID()
-    
-  def getCode(max ID+1)
-
-
-
-
-
-
-
