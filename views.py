@@ -1,5 +1,5 @@
-from flask import Flask, render_template, session, escape, request, redirect, url_for
-import db
+from flask import Flask, flash, render_template, session, escape, request, redirect, url_for
+import db, hashlib
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
@@ -12,35 +12,46 @@ def root():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
   if request.method == 'POST':
-    session['user'] = request.form['username']
-    user = session['user']
-    if user == 'HR_officer':
-        session['usertype'] = 'HR'
-        return redirect(url_for('listEmployees'))
-    if user == 'billing_officer':
-        session['usertype'] = 'BiO'
-        return redirect(url_for('listClients'))   
-    if user == 'manhour_officer':
-        session['usertype'] = 'MO'
-        return redirect(url_for('listDetachmentsManhour'))
-    if user == 'payroll_officer':
-        session['usertype'] = 'PyO'
-        return redirect(url_for('listDetachmentsPayroll'))
-    
-    #----TO BE ADDED -----
-    if user == 'payables_officer':
-        session['usertype'] = 'PbO'
-        return redirect(url_for('listDetachmentsPayables'))
-    if user == 'benefits_officer':
-        session['usertype'] = 'BeO'
-        return redirect(url_for('viewPeriodsBenefits'))
+
+    check = db.isUsernameExisting(request.form['username'], request.form['password'])
+
+    if check:
+
+      session['user'] = request.form['username']
+      session['usertype'] = db.getUserType(request.form['username'])
+      
+      if session['usertype'] == 'ADM':
+          return redirect(url_for('admin'))
+      elif session['usertype'] == 'HR':
+          return redirect(url_for('listEmployees'))
+      elif session['usertype'] == 'BiO':
+          return redirect(url_for('listClients'))   
+      elif session['usertype'] == 'MO':
+          return redirect(url_for('listDetachmentsManhour'))
+      elif session['usertype'] == 'PyO':
+          return redirect(url_for('listDetachmentsPayroll'))
+      
+      #----TO BE ADDED -----
+      elif session['usertype'] == 'PbO':
+          return redirect(url_for('listDetachmentsPayables'))
+      elif session['usertype'] == 'BeO':
+          return redirect(url_for('viewPeriodsBenefits'))
+      elif session['usertype'] == 'RO':
+          #Receivable Officer
+          return redirect(url_for('viewPeriodsBenefits'))
+      elif session['usertype'] == 'DO':
+          #Deployment Officer
+          return redirect(url_for('viewPeriodsBenefits'))
+      else:
+        return redirect(url_for(user))
     else:
-      return redirect(url_for(user))
+      flash("Invalid User")
   return render_template('login.html')
 
 @app.route('/logout')
 def logout():
   session.pop('user', None)
+  session.pop('usertype', None)
   return redirect(url_for('login'))
 
 @app.route('/admin', methods=['POST', 'GET'])
