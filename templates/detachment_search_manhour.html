@@ -43,14 +43,16 @@
               </thead>
           
               <tbody class="list">
+                  {% for Detachment in Detachments %}
                 <tr>
-                  <td class="id" style="display:none;">1</td>
-                  <td class="code">D001234</td>
-                  <td class="name"><a href='{{ url_for('viewPeriodsManhour') }}'>Accenture 1880</a></td>
-                  <td class="city">Quezon City</td>
-                  <td class="client">Accenture</td>
-                  <td class="status">Active</td>
+                  <td class="id" style="display:none;">{{ DE.ID }}</td>
+                  <td class="code">{{ Detachment.Code }}</td>
+                  <td class="name"><a href='{{ url_for('viewPeriodsManhour') }}'>{{ Detachment.Name }}</a></td>
+                  <td class="city">{{ DE.City }}</td>
+                  <td class="client">{{ DE.ClientName }}</td>
+                  <td class="status">{{ DE.Status }}</td>
                 </tr>
+                   {% endfor %}
                 <tr>
                   <td class="id" style="display:none;">2</td>
                   <td class="code">D004354</td>

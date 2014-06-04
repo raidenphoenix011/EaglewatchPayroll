@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+<div class="sidebar gradient">
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>CLIENT RECORDS</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h4>Client Information</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('listClients') }}' class='opt2'>View Client</a></li>
+            <li class="nobullets"><a href='{{ url_for('addClient') }}' class='opt2'>Add New Client</a></li>
+        </ul> 
+        <h4>Detachment Information</h4>
+        <ul class="right">
+            <li class="nobullets"><a href='{{ url_for('listDetachments') }}' class='opt2'>View Detachment</a></li>
+        </ul> 
+    </div>
+
+</div>
+
+{% endblock sidebar %}
+
+{% block content %}
+
+<h1>Client Information</h1>
+<hr>
+
+<form class='pure-form pure-form-aligned'>
+    
+<h2>Accenture</h2>
+
+<br/>
+
+    <label>Code: </label><input class='codebox' type='text' value='' disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Company Name: </label><input class='namebox' type='text' value=''/>
+    </tr>
+    
+</form>
+
+<br/><br/>
+    <!--{% for detachment in detachments %}-->
+    <!-- {% endfor %}-->
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Detachments</a></li>
+    <li><a href="#tabs-2">Basic Info</a></li>
+    <li><a href="#tabs-3">Contact Persons</a></li>
+  </ul>
+    <div id="tabs-1">
+        <div id="detachments">
+            <br/>
+            <form class='pure-form pure-form-aligned'>
+              <input type="text" class="search" placeholder="Search detachment" />
+            </form>
+            <br/>
+            <table class='search-results pure-table'>
+              <thead>
+                <tr>
+                  <th class="sort" data-sort="code">Code</th>
+                  <th class="sort" data-sort="name">Detachment Name</th>
+                  <th class="sort" data-sort="city">City</th>
+                  <th class="sort" data-sort="status">Status</th>
+                </tr>
+              </thead>
+          
+              <tbody class="list">
+                  
+                <tr>
+       
+                  <td class="id" style="display:none;"></td>
+                  <td class="code"></td>
+                  <td class="name"><a href=""></a></td>
+                  <td class="city"></td>
+                  <td class="status"></td>
+                </tr>
+                
+ 
+              </tbody>
+            </table>
+        </div>
+        <br><br/>
+        <form method='link' action='/detachments/get'>
+            <button class='pure-button'>Add New Detachment</button>
+        </form>
+  </div>
+  <div id="tabs-2">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+        <tr>
+            <td><label>Status: </label></td>
+            <td>
+            <select name="status">
+                    <option value="P">Pending</option>
+                    <option value="A">Active</option>
+                    <option value="T">Terminated</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Date Started: </label></td>
+            <td><input id='start_date' type='date' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>City: </label></td>
+            <td><input id='address' type='text' value=''/></td>
+        </tr>
+        <tr>
+            <td><label>Address: </label></td>
+            <td><textarea name='address' cols='22' row='3'></textarea></td>
+        </tr>
+
+
+    </table>
+    </form>
+  </div>
+  <div id="tabs-3">
+    <div id="contacts">
+    <form class='pure-form'>
+      <table class='pure-table'>
+        <thead>
+          <tr>
+            <th class="sort" data-sort="contact_name">Name</th>
+            <th class="sort" data-sort="position">Position</th>
+            <th class="sort" data-sort="number">Contact Number</th>
+            <th colspan="2">
+              <input type="text" class="search" placeholder="Search contact" id='search_contact' />
+            </th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td class="contact_id" style="display:none;">1</td>
+            <td class="contact_name">Mr. Hugh Jackman</td>
+            <td class="position">Area Manager</td>
+            <td class="number">09178232323</td>
+            <td class="edit"><button class="edit-item-btn pure-button">Update</button></td>
+            <td class="remove"><button class="remove-item-btn pure-button">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <table>
+        <td class="contact_name">
+          <input type="hidden" id="contact_id-field" />
+          <input type="text" id="contact_name-field" placeholder="name" />
+        </td>
+        <td class="position">
+          <input type="text" id="position-field" placeholder="position" />
+        </td>
+        <td class="number">
+          <input type="text" id="number-field" placeholder="contact number" />
+        </td>
+        <td class="add">
+          <button id="add-btn" class="pure-button">Add to Contacts</button>
+          <button id="edit-btn" class="pure-button">Update Contact</button>
+        </td>
+      </table>
+    </form>
+    </div>
+  </div>
+
+</div>
+<br/>
+<div id='buttoncontainer'>
+<button id='save' class='pure-button save'>Save Changes</button>
+</div>
+
+<!-------SCRIPT FOR ListJS search detachment ------>
+<script>
+var options = {
+  valueNames: [ 'id', 'code', 'name', 'city', 'status' ]
+};
+
+// Init list
+var detachmentList = new List('detachments', options);
+
+var idField = $('#id-field'),
+    codeField = $('#code-field'),
+    nameField = $('#name-field'),
+    cityField = $('#city-field'),
+    statusField = $('#status-field');
+</script>
+
+<!------SCRIPT FOR ListJS search contact ------->
+<script>
+var options2 = {
+  valueNames: [ 'contact_id', 'contact_name', 'position', 'number' ]
+};
+
+// Init list
+var contactList = new List('contacts', options2);
+
+var contact_idField = $('#contact_id-field'),
+    contact_nameField = $('#contact_name-field'),
+    positionField = $('#position-field'),
+    numberField = $('#number-field'),
+    addBtn = $('#add-btn'),
+    editBtn = $('#edit-btn').hide(),
+    removeBtns = $('.remove-item-btn'),
+    editBtns = $('.edit-item-btn');
+
+// Sets callbacks to the buttons in the list
+refreshCallbacks();
+
+addBtn.click(function() {
+  contactList.add({
+    contact_id: Math.floor(Math.random()*110000),
+    contact_name: contact_nameField.val(),
+    position: positionField.val(),
+    number: numberField.val()
+  });
+  clearFields();
+  refreshCallbacks();
+});
+
+editBtn.click(function() {
+  var item = contactList.get('contact_id', contact_idField.val())[0];
+  item.values({
+    contact_id:contact_idField.val(),
+    contact_name: contact_nameField.val(),
+    position: positionField.val(),
+    number: numberField.val()
+  });
+  clearFields();
+  editBtn.hide();
+  addBtn.show();
+});
+
+function refreshCallbacks() {
+  // Needed to add new buttons to jQuery-extended object
+  removeBtns = $(removeBtns.selector);
+  editBtns = $(editBtns.selector);
+  
+  removeBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.contact_id').text();
+    contactList.remove('contact_id', itemId);
+  });
+  
+  editBtns.click(function() {
+    var itemId = $(this).closest('tr').find('.contact_id').text();
+    var itemValues = contactList.get('contact_id', itemId)[0].values();
+    contact_idField.val(itemValues.contact_id);
+    contact_nameField.val(itemValues.contact_name);
+    positionField.val(itemValues.position);
+    numberField.val(itemValues.number);
+    
+    editBtn.show();
+    addBtn.hide();
+  });
+}
+
+function clearFields() {
+  contact_nameField.val('');
+  positionField.val('');
+  numberField.val('');
+}    
+</script>    
+
+    
+{% endblock content %}
