@@ -47,38 +47,16 @@
               </thead>
           
               <tbody class="list">
+                  {% for DE in DEs %}
                 <tr>
-                  <td class="id" style="display:none;">1</td>
-                  <td class="code">D001234</td>
-                  <td class="name"><a href='{{ url_for( 'viewDetachment', ID='1' ) }}'>Accenture 1880</a></td>
-                  <td class="city">Quezon City</td>
-                  <td class="client">Accenture</td>
-                  <td class="status">Active</td>
+                  <td class="id" style="display:none;">{{ DE.ID }}</td>
+                  <td class="code">{{ DE.Code }}</td>
+                  <td class="name"><a href='{{ url_for( 'viewDetachment', ID=DE.ID ) }}'>{{ DE.Name }}</a></td>
+                  <td class="city">{{ DE.City }}</td>
+                  <td class="client">{{ DE.ClientName }}</td>
+                  <td class="status">{{ DE.Status }}</td>
                 </tr>
-                <tr>
-                  <td class="id" style="display:none;">2</td>
-                  <td class="code">D004354</td>
-                  <td class="name">Accenture Global One</td>
-                  <td class="city">Taguig</td>
-                  <td class="client">Accenture</td>
-                  <td class="status">Active</td>
-                </tr>
-                <tr>
-                  <td class="id" style="display:none;">3</td>
-                  <td class="code">D004354</td>
-                  <td class="name">Science Hub</td>
-                  <td class="city">Makati</td>
-                  <td class="client">Accenture</td>
-                  <td class="status">Pending</td>
-                </tr>
-                <tr>
-                  <td class="id" style="display:none;">4</td>
-                  <td class="code">D003245</td>
-                  <td class="name">Gateway</td>
-                  <td class="city">Quezon City</td>
-                  <td class="client">Accenture</td>
-                  <td class="status">Terminated</td>
-                </tr>
+                  {% endfor %}
               </tbody>
             </table>
         </div>

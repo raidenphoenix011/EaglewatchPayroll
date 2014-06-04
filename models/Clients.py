@@ -2,11 +2,17 @@ import db
     
 class Clients(object):
 
+<<<<<<< HEAD
   def __init__(self, Code, Name, BillingAddress, Landline, ):
         
+=======
+  def __init__(self, ID, Code, Name, BillingAddress, City, Landline):
+    self.ID=ID    
+>>>>>>> 97f8fa70fe7f5c122ed32450bd481d77d869cc9d
     self.Code=Code
     self.Name=Name
     self.BillingAddress=BillingAddress
+    self.City=City
     self.Landline=Landline
     
   def save(self):

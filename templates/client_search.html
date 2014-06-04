@@ -45,6 +45,7 @@
     </thead>
 
     <tbody class="list">
+<<<<<<< HEAD
       {% for client in clients %}
       <tr>
         <td class="id" style="display:none;">client.ID</td>
@@ -55,6 +56,18 @@
       </tr>
       {% endfor %}
 
+=======
+        {% for Client in CLs %}
+      <tr>
+        <td class="id" style="display:none;"></td>
+        <td class="code">{{ Client.Code }}</td>
+        <td class="name"><a href='{{ url_for('viewClient', ID=Client.ID) }}'>{{ Client.Name }}</a></td>
+	    <td class="city">Taguig</td>
+        <td class="status">Active</td>
+       </tr>
+        {% endfor %}
+     
+>>>>>>> 97f8fa70fe7f5c122ed32450bd481d77d869cc9d
     </tbody>
   </table>
 </div>

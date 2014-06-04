@@ -33,8 +33,8 @@
 
 <br/>
 
-    <label>Code: </label><input class='codebox' type='text' value='' disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label>Company Name: </label><input class='namebox' type='text' value=''/>
+    <label>Code: </label><input class='codebox' type='text' value='{{ Client.Code }}' disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Company Name: </label><input class='namebox' type='text' value='{{ Client.Name }}'/>
     </tr>
     
 </form>
@@ -66,34 +66,17 @@
               </thead>
           
               <tbody class="list">
+                  {% for Detachment in Detachments %}
                 <tr>
-                  <td class="id" style="display:none;">1</td>
-                  <td class="code">D001234</td>
-                  <td class="name"><a href='/detachments/get'>Accenture 1880</a></td>
-                  <td class="city">Quezon City</td>
-                  <td class="status">Active</td>
+       
+                  <td class="id" style="display:none;">{{ Detachment.ID}}</td>
+                  <td class="code">{{ Detachment.Code }}</td>
+                  <td class="name"><a href="{{ url_for('viewDetachment', ID=Client.ID) }}">{{ Detachment.Name }}</a></td>
+                  <td class="city">{{ Detachment.City }}</td>
+                  <td class="status">{{ Detachment.Status }}</td>
                 </tr>
-                <tr>
-                  <td class="id" style="display:none;">2</td>
-                  <td class="code">D004354</td>
-                  <td class="name">Accenture Global One</td>
-                  <td class="city">Taguig</td>
-                  <td class="status">Active</td>
-                </tr>
-                <tr>
-                  <td class="id" style="display:none;">3</td>
-                  <td class="code">D004354</td>
-                  <td class="name">Science Hub</td>
-                  <td class="city">Makati</td>
-                  <td class="status">Pending</td>
-                </tr>
-                <tr>
-                  <td class="id" style="display:none;">4</td>
-                  <td class="code">D003245</td>
-                  <td class="name">Gateway</td>
-                  <td class="city">Quezon City</td>
-                  <td class="status">Terminated</td>
-                </tr>
+                  {% endfor %}
+ 
               </tbody>
             </table>
         </div>
@@ -121,8 +104,7 @@
         </tr>
         <tr>
             <td><label>City: </label></td>
-            <td>
-                <select name="city">
+            <td><select name="city">
                     <option value=Alaminos>Alaminos</option>
                     <option value=Angeles>Angeles</option>
                     <option value=Antipolo>Antipolo</option>
@@ -227,12 +209,12 @@
                     <option value=Victorias >Victorias</option>
                     <option value=Vigan >Vigan</option>
                     <option value=Zamboanga >Zamboanga</option>
-            </select>
-            </td>
+            </select></td>
         </tr>
         <tr>
             <td><label>Address: </label></td>
             <td><textarea name='address' cols='22' row='3'></textarea></td>
+            
         </tr>
 
 
