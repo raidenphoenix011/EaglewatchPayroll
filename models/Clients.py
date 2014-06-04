@@ -2,7 +2,7 @@ import db
     
 class Clients(object):
 
-  def __init__(self, Code, Name, BillingAddress, Landline):
+  def __init__(self, Code, Name, BillingAddress, Landline, ):
         
     self.Code=Code
     self.Name=Name

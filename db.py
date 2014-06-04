@@ -27,7 +27,7 @@ SSSContributions = import_file.import_file('models/SSSContributions.py')
 SSSLoans = import_file.import_file('models/SSSLoans.py')
 UniformDeposits = import_file.import_file('models/UniformDeposits.py')
 
-mysql = MySQLdb.connect('localhost','raymond','password','Eaglewatch')
+mysql = MySQLdb.connect('localhost','AdminPayroll','Password','Eaglewatch')
 cur = mysql.cursor()
 
 def getOne(sql, params):
