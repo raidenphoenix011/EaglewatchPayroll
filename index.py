@@ -46,7 +46,7 @@ def clients(user=None):
 
 @app.route('/clients/get', methods=['POST', 'GET'])
 def client(user=None):
-  return render_template('client.html', user=escape(session['user']))
+  return render_template('client.html', client=db.getAllClients(), user=escape(session['user']))
 
 @app.route('/detachments/get', methods=['POST', 'GET'])
 def detachment(user=None):

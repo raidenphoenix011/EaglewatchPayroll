@@ -90,7 +90,7 @@ def getAllClients():
   ClientList = []
   for row in res:
     if row is not None:
-      Client = Clients.Clients( int(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]) )
+      Client = Clients.Clients( int(row[0]), str(row[1]), str(row[2]), str(row[3]))
       ClientList.append(Client)
       row = cur.fetchone()
   return ClientList
