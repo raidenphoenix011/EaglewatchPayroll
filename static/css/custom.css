@@ -1,6 +1,9 @@
 
 /*GENERAL*/
 
+.id {
+    display:none;
+}
 body {
     font-family: FreeSans,Arimo,'Droid Sans',Helvetica,Arial,sans-serif;
     

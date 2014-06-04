@@ -1,5 +1,6 @@
 import MySQLdb, hashlib, cgi, cgitb; cgitb.enable()
 import import_file, logging
+from flask import flash
 
 Allowances = import_file.import_file('models/Allowances.py')
 AuthorizedManHours = import_file.import_file('models/AuthorizedManHours.py')
@@ -26,7 +27,7 @@ SSSContributions = import_file.import_file('models/SSSContributions.py')
 SSSLoans = import_file.import_file('models/SSSLoans.py')
 UniformDeposits = import_file.import_file('models/UniformDeposits.py')
 
-mysql = MySQLdb.connect('localhost','AdminPayroll','Password','Eaglewatch')
+mysql = MySQLdb.connect('localhost','raymond','password','Eaglewatch')
 cur = mysql.cursor()
 
 def getOne(sql, params):
@@ -59,6 +60,58 @@ def SubList(tableName, foreignKey, value):
   res = getAll(sql)
   return res
 
+def checkPW(value):
+  try: 
+    sql = "SELECT Password FROM OfficeEmployees WHERE Username = " + "'" + value + "'"
+    cur.execute(sql)
+    res = cur.fetchone()
+    List = list()
+    for row in res:
+      List.append(row)
+    List = "".join(List)
+    return List
+  except MySQLdb.Error, e:
+    print str(e.args[0]) + ': ' + str(e.args[1])
+    return None
+
+def getUserType(username):
+  try: 
+    sql = "SELECT Type FROM OfficeEmployees WHERE Username = " + "'" + username + "'"
+    cur.execute(sql)
+    res = cur.fetchone()
+    List = list()
+    for row in res:
+      List.append(row)
+    List = "".join(List)
+    return List
+  except MySQLdb.Error, e:
+    print str(e.args[0]) + ': ' + str(e.args[1])
+    return None
+
+def isUsernameExisting(username, password):
+  res = checkPW(username)
+  print res
+  if res is not None:
+    print hashlib.sha1(password).hexdigest()
+    if res == hashlib.sha1(password).hexdigest():
+      return True
+    else:
+      return False
+  else:
+      return False
+
+def login(username, password):
+  sql = "SELECT Username, Password FROM OfficeEmployees WHERE Username = %s" % username
+  res = cur.execute(sql)
+  #Creds = []
+  for row in res:
+    if row is not None:
+      #Creds.append([ str(row[0]), str(row[1]) ])
+      if str(hashlib.sha1(password)) == row[1]:
+        return 1
+      #row = cur.fetchone()
+  return None
+
 def getEmployee(val):
   #sql = "SELECT * FROM FieldEmployees"
   #res = getAll(sql)
@@ -90,7 +143,7 @@ def getAllClients():
   ClientList = []
   for row in res:
     if row is not None:
-      Client = Clients.Clients( int(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]) )
+      Client = Clients.Clients( int(row[0]), str(row[1]), str(row[2]), str(row[3]))
       ClientList.append(Client)
       row = cur.fetchone()
   return ClientList
