@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+
+{% block sidebar %}
+
+<div class="sidebar gradient">
+    
+    <hr class='navline navline1'/>
+    <h2 class='navtitle'>HR SYSTEM</h2>
+    <hr class='navline'/>
+    
+    <div class='sidebar-menu'>
+        <h3>Employee Records</h3>
+        <ul class="right">
+            <li class="nobullets"><a href='/employees' class='opt2'>View Employee</a></li>
+            <li class="nobullets"><a href='{{ url_for('addFieldEmployee') }}' class='opt2'>Add New Employee</a></li>
+        </ul> 
+    </div>
+
+</div>
+{% endblock sidebar %}
+
+{% block content %}
+<h1>Employee Information</h1>
+<hr>
+<div class=''>
+<form class='pure-form pure-form-aligned'>
+
+<h2></h2>
+
+<br/>
+
+<table id='guard_info'>
+    <tr>
+        <td><label>Code: </label></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><label>Last Name: </label></td>
+        <td><input name='last_name' id='last_name' type='text' value=''/></td>
+        <td><label>First Name: </label></td>
+        <td><input name='first_name' id='first_name' type='text' value=''/></td>
+        <td><label>Middle Name: </label></td>
+        <td><input name = 'middle_name' id='middle_name' type='text' value=''/></td>
+        <td><label>Suffix: </label><input name='suffix' id='suffix' type='text' value=''/</td>
+    </tr>
+</table>
+</form>
+
+</div>
+<br/>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Employment</a></li>
+    <li><a href="#tabs-2">Personal</a></li>
+    <li><a href="#tabs-3">Family</a></li>
+    <li><a href="#tabs-4">Skills</a></li>
+    <li><a href="#tabs-5">Health</a></li>
+    <li><a href="#tabs-6">201 Docs</a></li>
+  </ul>
+    <div id="tabs-1">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+    <tr>
+        <td><label>Status: </label></td>
+        <td>
+            <select id='status' name="status">
+                <option value="active">Active</option>
+                <option value="awol">AWOL</option>
+                <option value="resigned">Resigned</option>
+                <option value="retired">Retired</option>
+             </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label>Position: </label></td>
+        <td>
+            <select id="position" name="position">
+                <option value="SG">Security Guard</option>
+                <option value="SV">Supervisor</option>
+                <option value="LG">Lady Guard</option>
+                <option value="CSA">Customer Service Assistant</option>
+             </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label>Date Hired: </label></td>
+        <td><input id='date_hired' name='date_hired' type='date' value=''/></td>
+    </tr>
+    <tr>
+        <td><label>Date Resigned: </label></td>
+        <td><input name='date_resigned' type='date' value=''/></td>
+    </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-2">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+        <tr>
+            <td><label>Gender: </label></td>
+            <td>
+            <select name="gender">
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+             </select>
+            </td>
+            <td><label>Mobile No.: </label></td>
+            <td><input name='mobile_no' type='text' value=''/></td>
+        </tr>
+        <tr>    
+            <td><label>Height: </label></td>
+            <td><input name='height' type='text' value='' placeholder=''/></td>
+            <td><label>Landline No.: </label></td>
+            <td><input name='landline' type='text' value=''/><td/>
+        </tr>
+        <tr>
+            <td><label>Nationality: </label></td>
+            <td><input name='nationality' type='text' value=''/></td>
+                    <td><label>Address: </label></td>
+            <td rowspan='2'><textarea name='address' cols='21' rows='3'></textarea><td/>
+        </tr>
+        <tr>
+            <td><label>Birthdate: </label></td>
+            <td><input name='birthdate' type='date' value=''/></td>
+        </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-3">
+    <form class='pure-form pure-form-aligned'>
+    <table>
+        <tr>
+            <td><label>Civil Status: </label></td>
+            <td>
+                <select name="civil_status">
+                    <option value="s">Single</option>
+                    <option value="m">Married</option>
+                    <option value="l">Live-in</option>
+                    <option value="p">Separated</option>
+                    <option value="w">Widower/Widowed</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>No. of Dependents: </label></td>
+            <td><input name-'dependents' type='text' value=''/></td>
+        </tr>
+    </table>
+    </form>
+  </div>
+  <div id="tabs-4">
+    <form class='pure-form pure-form-aligned'>
+    <label>Skills: </label><input name='skills' type='text' value=''/><br/>
+    </form>
+  </div>
+  <div id="tabs-5">
+    <form class='pure-form pure-form-aligned'>
+    <label>Health Status:</label>
+    <select name="health_status">
+        <option value="cleared">Cleared</option>
+        <option value="hypertensive">Hypertensive</option>
+    </select>
+    </form>
+  </div>
+  <div id="tabs-6">
+    <form class='pure-form pure-form-aligned'>
+    <label>201 Document Status:</label>
+    <select name="201_status">
+        <option value="cleared">Cleared</option>
+        <option value="expired">Expired</option>
+    </select>
+    </form>
+  </div>
+</div>
+<br/>
+<div id='buttoncontainer'>
+<button id='save' class='pure-button save'>Save Changes</button>
+</div>
+
+
+{% endblock content %}

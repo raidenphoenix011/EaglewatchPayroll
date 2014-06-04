@@ -14,7 +14,7 @@
         </ul> 
         <h4>Detachment Information</h4>
         <ul class="right">
-            <li class="nobullets"><a href='{{ url_for('listDetachments') }}' class='opt2'>View Detachment</a></li>
+            <li class="nobullets"><a href='' class='opt2'>View Detachment</a></li>
         </ul> 
     </div>
 
@@ -31,8 +31,8 @@
 <form class='pure-form pure-form-aligned'>
 
 <br/>
-    <label>Code: </label><input class='detachmentcode' id='det_code' type='text' value='' disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label>Detachment Name: </label><input class='namebox' id='det_name' type='text' value=''/>
+    <label>Code: </label><input class='detachmentcode' id='det_code' type='text' value='{{ DE.Code}}' disabled/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Detachment Name: </label><input class='namebox' id='det_name' type='text' value='{{ DE.Name }}'/>
 <br/><br/>
 </form>
 
@@ -62,19 +62,19 @@
         </tr>
         <tr>
             <td><label>Start Date: </label></td>
-            <td><input type='date' value=''/></td>
+            <td><input type='date' value='{{DE.StartDate}}'/></td>
         </tr>
         <tr>
             <td><label>Termination Date: </label></td>
-            <td><input type='date' value=''/></td>
+            <td><input type='date' value='{{DE.EndDate}}'/></td>
         </tr>
         <tr>
             <td><label>City: </label></td>
-            <td><input type='text' value=''/></td>
+            <td><input type='text' value='{{DE.City}}'/></td>
         </tr>
         <tr>
             <td><label>Address: </label></td>
-            <td><textarea cols='22' rows='2'></textarea></td>
+            <td><textarea cols='22' rows='2'>{{DE.Address}}</textarea></td>
         </tr>
     </table>
     </form>

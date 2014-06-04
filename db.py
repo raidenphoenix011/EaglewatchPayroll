@@ -94,8 +94,21 @@ def getAllClients():
       ClientList.append(Client)
       row = cur.fetchone()
   return ClientList
+    
+def getClient(val):
+  #sql = "SELECT * FROM FieldEmployees"
+  #res = getAll(sql)
+  res = SubList("Clients", "ID", val)
+  #FieldEmployeeList = []
+  for row in res:
+    if row is not None:
+      #FieldEmployeeList.append([ str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]), str(row[10]), str(row[11]), str(row[12]), str(row[13]), str(row[14]), str(row[15]), str(row[16]), str(row[17]), str(row[18]), str(row[19]), str(row[20]) ])
+      Client = Clients.Clients( str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]))
+      #FieldEmployeeList.append(FieldEmployee)
+      #row = cur.fetchone()
+  return Client    
 
-def getAllDetachments(val):
+def getAllDetachmentsbyID(val):
   #sql = "SELECT * FROM FieldEmployees"
   #res = getAll(sql)
   res = SubList("Detachments", "ClientID", val)
@@ -103,10 +116,46 @@ def getAllDetachments(val):
   for row in res:
     if row is not None:
       #FieldEmployeeList.append([ str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]), str(row[10]), str(row[11]), str(row[12]), str(row[13]), str(row[14]), str(row[15]), str(row[16]), str(row[17]), str(row[18]), str(row[19]), str(row[20]) ])
-      Detachment = Detachments.Detachments( int(row[0]), int(row[1]), int(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]) )
+      Detachment = Detachments.Detachments( str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]) )
       DetachmentList.append(Detachment)
       row = cur.fetchone()
   return DetachmentList
+    
+def getAllDetachments():
+  sql = "SELECT * FROM Detachments"
+  res = getAll(sql)
+  #res = SubList("Detachments", "ClientID", val)
+  DetachmentList = []
+  for row in res:
+    if row is not None:
+      #FieldEmployeeList.append([ str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]), str(row[10]), str(row[11]), str(row[12]), str(row[13]), str(row[14]), str(row[15]), str(row[16]), str(row[17]), str(row[18]), str(row[19]), str(row[20]) ])
+      Detachment = Detachments.Detachments( str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]) )
+      DetachmentList.append(Detachment)
+      row = cur.fetchone()
+  return DetachmentList    
+    
+    
+def getDetachment(val):
+  #sql = "SELECT * FROM FieldEmployees"
+  #res = getAll(sql)
+  res = SubList("Detachments", "ID", val)
+  #DetachmentList = []
+  for row in res:
+    if row is not None:
+      #FieldEmployeeList.append([ str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]), str(row[10]), str(row[11]), str(row[12]), str(row[13]), str(row[14]), str(row[15]), str(row[16]), str(row[17]), str(row[18]), str(row[19]), str(row[20]) ])
+      Detachment = Detachments.Detachments( int(row[0]), int(row[1]), int(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]), str(row[9]) )
+      #DetachmentList.append(Detachment)
+  return Detachment  
+
+def getClientName(val):
+  try: 
+    cur.execute("select Name from Clients where ID = %s" % (val))
+    res = cur.fetchone()
+    return res[0]
+  except MySQLdb.Error, e:
+    print str(e.args[0]) + ': ' + str(e.args[1])
+    #print 'Error retrieving data from the database'
+    return None
 
 def getClientContactPersons(val):
   res = SubList("ClientContactPersons", "ClientID", val)

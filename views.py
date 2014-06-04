@@ -58,29 +58,28 @@ def viewEmployee(ID, user=None):
 @app.route('/employees/add', methods=['POST', 'GET'])
 def addFieldEmployee(user=None):
   #getMaxID + 1
-  field_employee = FieldEmployee('','','','','','','','','','','','','','','','','','','','')
-  return render_template('employee.html', FE = field_employee, user=escape(session['user']), )
+  return render_template('employee_blank.html', user=escape(session['user']), )
 
 @app.route('/clients', methods=['POST', 'GET'])
 def listClients(user=None):
-  return render_template('client_search.html', goto='listDetachments', user=escape(session['user']))
+  return render_template('client_search.html', goto='listDetachments', CLs=db.getAllClients(), user=escape(session['user']))
 
 #@app.route('/clients/get/<ID>', methods=['POST', 'GET'])
 #def client(ID, user=None):
   #client = getClient(ID)
   #return render_template('client.html',Client = client, user=escape(session['user']))
-@app.route('/clients/get', methods=['POST', 'GET'])
-def viewClient(user=None):
-  return render_template('client.html', user=escape(session['user']))
+@app.route('/clients/get/<ID>', methods=['POST', 'GET'])
+def viewClient(ID, user=None):
+  return render_template('client.html', Client = db.getClient(ID), Detachments = db.getAllDetachmentsbyID(ID), user=escape(session['user']))
 
 @app.route('/clients/add', methods=['POST', 'GET'])
-def addClient(user=None):
+def addClient(user=None): 
     #getMaxID() + 1
-  return render_template('client.html', user=escape(session['user']))
+  return render_template('client_blank.html', user=escape(session['user']))
 
 @app.route('/detachments/get/<ID>', methods=['POST', 'GET'])
 def viewDetachment(ID, user=None):
-  return render_template('detachment.html', user=escape(session['user']))
+  return render_template('detachment.html', DE = db.getDetachment(ID), user=escape(session['user']))
 
 @app.route('/manhours/detachments/get/id/add', methods=['POST', 'GET'])
 def addManhour(user=None):
@@ -94,9 +93,12 @@ def manhour(user=None):
 def listDetachmentsManhour(user=None):
     return render_template('detachment_search_manhour.html', user=escape(session['user']))
 
-@app.route('/detachments', methods=['POST', 'GET'])
+@app.route('/detachments/lists/', methods=['POST', 'GET'])
 def listDetachments(user=None):
-    return render_template('detachment_search.html', user=escape(session['user']))
+  listDE = db.getAllDetachments()
+  for DE in listDE:
+    DE.setClientName(DE.ClientID)
+  return render_template('detachment_search.html', DEs = listDE, user=escape(session['user']))
 
 @app.route('/payroll/detachments', methods=['POST', 'GET'])
 def listDetachmentsPayroll(user=None):
